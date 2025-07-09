@@ -1,19 +1,24 @@
 {
-	"name": "n8n-nodes-prestashop-api",
+	"name": "n8n-nodes-phantombuster-api",
 	"version": "0.1.0",
-	"description": "",
+	"description": "Nodo personalizado de n8n para Phantombuster API - Automatización de LinkedIn",
 	"keywords": [
-		"n8n-community-node-package"
+		"n8n-community-node-package",
+		"phantombuster",
+		"linkedin",
+		"automation",
+		"n8n",
+		"ai-tools"
 	],
 	"license": "MIT",
 	"homepage": "",
 	"author": {
-		"name": "",
+		"name": "Cristian",
 		"email": ""
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/<...>/n8n-nodes-<...>.git"
+		"url": "https://github.com/cristian/n8n-nodes-phantombuster-api.git"
 	},
 	"engines": {
 		"node": ">=20.15"
@@ -33,10 +38,12 @@
 	"n8n": {
 		"n8nNodesApiVersion": 1,
 		"credentials": [
-			"dist/credentials/PrestashopNodeApi.credentials.js"
+			"dist/credentials/PhantombusterCredentialsApi.credentials.js"
 		],
 		"nodes": [
-			"dist/nodes/PrestashopNode/PrestashopNode.node.js"
+			"dist/nodes/PhantombusterApi/Phantombuster.node.js",
+			"dist/nodes/PhantombusterApi/PhantombusterTool.node.js",
+			"dist/nodes/PhantombusterApi/PhantombusterMCPTool.node.js"
 		]
 	},
 	"devDependencies": {
@@ -49,5 +56,9 @@
 	},
 	"peerDependencies": {
 		"n8n-workflow": "*"
+	},
+	"dependencies": {
+		"@langchain/core": "^0.3.62",
+		"zod": "^4.0.0"
 	}
 }
