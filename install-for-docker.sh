@@ -45,8 +45,8 @@ if ! command -v docker &> /dev/null; then
 fi
 
 # Verificar que docker-compose está instalado
-if ! command -v docker-compose &> /dev/null; then
-    print_error "docker-compose no está instalado. Por favor instala docker-compose primero."
+if ! command -v docker compose &> /dev/null; then
+    print_error "docker compose no está instalado. Por favor instala docker compose primero."
     exit 1
 fi
 
@@ -87,7 +87,8 @@ fi
 # Mostrar información de configuración
 echo ""
 print_status "📋 Configuración del docker-compose.yml:"
-echo "   • Imagen corregida: n8nio/n8n:1.95.3"
+echo "   • Imagen corregida: docker.n8n.io/n8nio/n8n:1.95.3"
+
 echo "   • Nodos personalizados montados en: /home/node/.n8n/custom"
 echo "   • Variables de entorno configuradas"
 echo ""
