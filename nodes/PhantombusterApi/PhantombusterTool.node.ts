@@ -91,6 +91,7 @@ export class PhantombusterTool implements INodeType {
 								const executeContext = {
 									getCredentials: this.getCredentials.bind(this),
 									helpers: this.helpers,
+									getNode: this.getNode.bind(this),
 								} as IExecuteFunctions;
 
 								const response = await phantombusterApiRequest.call(
@@ -124,6 +125,7 @@ export class PhantombusterTool implements INodeType {
 								const executeContext = {
 									getCredentials: this.getCredentials.bind(this),
 									helpers: this.helpers,
+									getNode: this.getNode.bind(this),
 								} as IExecuteFunctions;
 
 								const response = await phantombusterApiRequest.call(
@@ -153,6 +155,7 @@ export class PhantombusterTool implements INodeType {
 								const executeContext = {
 									getCredentials: this.getCredentials.bind(this),
 									helpers: this.helpers,
+									getNode: this.getNode.bind(this),
 								} as IExecuteFunctions;
 
 								const qs: IDataObject = {};
@@ -188,6 +191,7 @@ export class PhantombusterTool implements INodeType {
 								const executeContext = {
 									getCredentials: this.getCredentials.bind(this),
 									helpers: this.helpers,
+									getNode: this.getNode.bind(this),
 								} as IExecuteFunctions;
 
 								const qs: IDataObject = {};
@@ -234,6 +238,7 @@ export class PhantombusterTool implements INodeType {
 								const executeContext = {
 									getCredentials: this.getCredentials.bind(this),
 									helpers: this.helpers,
+									getNode: this.getNode.bind(this),
 								} as IExecuteFunctions;
 
 								const response = await phantombusterApiRequest.call(
@@ -268,6 +273,7 @@ export class PhantombusterTool implements INodeType {
 								const executeContext = {
 									getCredentials: this.getCredentials.bind(this),
 									helpers: this.helpers,
+									getNode: this.getNode.bind(this),
 								} as IExecuteFunctions;
 
 								const qs: IDataObject = {
@@ -304,6 +310,7 @@ export class PhantombusterTool implements INodeType {
 								const executeContext = {
 									getCredentials: this.getCredentials.bind(this),
 									helpers: this.helpers,
+									getNode: this.getNode.bind(this),
 								} as IExecuteFunctions;
 
 								const qs: IDataObject = {};
@@ -336,6 +343,7 @@ export class PhantombusterTool implements INodeType {
 								const executeContext = {
 									getCredentials: this.getCredentials.bind(this),
 									helpers: this.helpers,
+									getNode: this.getNode.bind(this),
 								} as IExecuteFunctions;
 
 								const response = await phantombusterApiRequest.call(
@@ -362,6 +370,7 @@ export class PhantombusterTool implements INodeType {
 								const executeContext = {
 									getCredentials: this.getCredentials.bind(this),
 									helpers: this.helpers,
+									getNode: this.getNode.bind(this),
 								} as IExecuteFunctions;
 
 								const response = await phantombusterApiRequest.call(
@@ -390,6 +399,7 @@ export class PhantombusterTool implements INodeType {
 								const executeContext = {
 									getCredentials: this.getCredentials.bind(this),
 									helpers: this.helpers,
+									getNode: this.getNode.bind(this),
 								} as IExecuteFunctions;
 
 								const response = await phantombusterApiRequest.call(
@@ -421,6 +431,7 @@ export class PhantombusterTool implements INodeType {
 								const executeContext = {
 									getCredentials: this.getCredentials.bind(this),
 									helpers: this.helpers,
+									getNode: this.getNode.bind(this),
 								} as IExecuteFunctions;
 
 								const response = await phantombusterApiRequest.call(
@@ -449,6 +460,7 @@ export class PhantombusterTool implements INodeType {
 								const executeContext = {
 									getCredentials: this.getCredentials.bind(this),
 									helpers: this.helpers,
+									getNode: this.getNode.bind(this),
 								} as IExecuteFunctions;
 
 								const response = await phantombusterApiRequest.call(
@@ -477,6 +489,7 @@ export class PhantombusterTool implements INodeType {
 								const executeContext = {
 									getCredentials: this.getCredentials.bind(this),
 									helpers: this.helpers,
+									getNode: this.getNode.bind(this),
 								} as IExecuteFunctions;
 
 								const response = await phantombusterApiRequest.call(
@@ -505,6 +518,7 @@ export class PhantombusterTool implements INodeType {
 								const executeContext = {
 									getCredentials: this.getCredentials.bind(this),
 									helpers: this.helpers,
+									getNode: this.getNode.bind(this),
 								} as IExecuteFunctions;
 
 								const response = await phantombusterApiRequest.call(
@@ -534,6 +548,7 @@ export class PhantombusterTool implements INodeType {
 								const executeContext = {
 									getCredentials: this.getCredentials.bind(this),
 									helpers: this.helpers,
+									getNode: this.getNode.bind(this),
 								} as IExecuteFunctions;
 
 								const response = await phantombusterApiRequest.call(
@@ -574,6 +589,7 @@ export class PhantombusterTool implements INodeType {
 								const executeContext = {
 									getCredentials: this.getCredentials.bind(this),
 									helpers: this.helpers,
+									getNode: this.getNode.bind(this),
 								} as IExecuteFunctions;
 
 								const response = await phantombusterApiRequest.call(
@@ -615,6 +631,7 @@ export class PhantombusterTool implements INodeType {
 								const executeContext = {
 									getCredentials: this.getCredentials.bind(this),
 									helpers: this.helpers,
+									getNode: this.getNode.bind(this),
 								} as IExecuteFunctions;
 
 								const qs: IDataObject = {
