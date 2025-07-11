@@ -54,7 +54,8 @@ export class PhantombusterMCPTool implements INodeType {
 		const toolDescription = this.getNodeParameter('toolDescription', itemIndex) as string;
 
 		if (!workflowId) {
-			throw new NodeOperationError(this.getNode(), 'Workflow ID es requerido');
+			const node = this.getNode ? this.getNode() : null;
+			throw new NodeOperationError(node as any, 'Workflow ID es requerido');
 		}
 
 		// Crear tool que llama al sub-workflow

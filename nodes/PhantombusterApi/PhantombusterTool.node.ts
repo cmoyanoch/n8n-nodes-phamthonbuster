@@ -656,7 +656,8 @@ export class PhantombusterTool implements INodeType {
 				};
 
 			default:
-				throw new NodeOperationError(this.getNode(), `Tool "${tool}" no soportado`);
+				const node = this.getNode ? this.getNode() : null;
+		throw new NodeOperationError(node as any, `Tool "${tool}" no soportado`);
 		}
 	}
 }

@@ -19,7 +19,8 @@ export async function phantombusterApiRequest(
 	const credentials = await this.getCredentials('phantombusterCredentialsApi');
 
 	if (credentials === undefined) {
-		throw new NodeApiError(this.getNode(), { message: 'No credentials got returned!' });
+		const node = this.getNode ? this.getNode() : null;
+		throw new NodeApiError(node as any, { message: 'No credentials got returned!' });
 	}
 
 	const { apiKey } = credentials as { apiKey: string };
@@ -65,7 +66,8 @@ export async function phantombusterApiRequest(
 			}
 		}
 
-		throw new NodeApiError(this.getNode(), error as JsonObject, { message: errorMessage });
+		const node = this.getNode ? this.getNode() : null;
+		throw new NodeApiError(node as any, error as JsonObject, { message: errorMessage });
 	}
 }
 
