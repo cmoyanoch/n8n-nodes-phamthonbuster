@@ -376,7 +376,7 @@ export class PhantombusterTool implements INodeType {
 								const response = await phantombusterApiRequest.call(
 									executeContext,
 									'GET',
-									'user/limits'
+									'user'
 								);
 								return JSON.stringify(response, null, 2);
 							} catch (error) {
@@ -405,10 +405,8 @@ export class PhantombusterTool implements INodeType {
 								const response = await phantombusterApiRequest.call(
 									executeContext,
 									'POST',
-									`agents/renew-cookies`,
-									{
-										id: input.agentId,
-									}
+									`agents/${input.agentId}/renew-cookies`,
+									{}
 								);
 								return JSON.stringify(response, null, 2);
 							} catch (error) {
@@ -437,7 +435,7 @@ export class PhantombusterTool implements INodeType {
 								const response = await phantombusterApiRequest.call(
 									executeContext,
 									'GET',
-									`agents/verify-cookies?id=${input.agentId}`
+									`agents/${input.agentId}/verify-cookies`
 								);
 								return JSON.stringify(response, null, 2);
 							} catch (error) {
