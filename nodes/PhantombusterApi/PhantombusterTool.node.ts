@@ -201,7 +201,7 @@ export class PhantombusterTool implements INodeType {
 								const response = await phantombusterApiRequest.call(
 									executeContext,
 									'GET',
-									`agents/fetch-output?id=${input.agentId}`,
+									`agents/${input.agentId}/fetch-output`,
 									{},
 									qs
 								);
