@@ -28,7 +28,7 @@ export async function phantombusterApiRequest(
 	const options: IRequestOptions = {
 		headers: {
 			'Content-Type': 'application/json',
-			'X-Phantombuster-Key': apiKey,
+			'X-Phantombuster-Key-1': apiKey,
 			...headers,
 		},
 		method,

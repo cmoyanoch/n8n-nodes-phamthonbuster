@@ -364,8 +364,10 @@ export class PhantombusterTool implements INodeType {
 					response: new DynamicStructuredTool({
 						name: 'phantombuster_get_limits',
 						description: 'Obtiene los límites y uso actual de la cuenta',
-						schema: z.object({}),
-						func: async () => {
+						schema: z.object({
+							days: z.number().optional().describe('Cantidad de días a consultar (por defecto 30)'),
+						}),
+						func: async (input) => {
 							try {
 								const executeContext = {
 									getCredentials: this.getCredentials.bind(this),
@@ -376,7 +378,9 @@ export class PhantombusterTool implements INodeType {
 								const response = await phantombusterApiRequest.call(
 									executeContext,
 									'GET',
-									'orgs/export-agent-usage'
+									'orgs/export-agent-usage',
+									{},
+									{ days: input.days ?? 30 }
 								);
 								return JSON.stringify(response, null, 2);
 							} catch (error) {
