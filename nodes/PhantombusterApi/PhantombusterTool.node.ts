@@ -185,6 +185,7 @@ export class PhantombusterTool implements INodeType {
 						description: 'Lista las ejecuciones de un agente específico',
 						schema: z.object({
 							agentId: z.string().describe('ID del agente de Phantombuster'),
+							limit: z.number().optional().describe('Número máximo de ejecuciones (por defecto 10)'),
 						}),
 						func: async (input) => {
 							try {
@@ -194,10 +195,20 @@ export class PhantombusterTool implements INodeType {
 									getNode: this.getNode.bind(this),
 								} as IExecuteFunctions;
 
+								const qs: IDataObject = {
+									id: input.agentId,
+								};
+
+								if (input.limit) {
+									qs.limit = input.limit;
+								}
+
 								const response = await phantombusterApiRequest.call(
 									executeContext,
 									'GET',
-									`agents/fetch-output?id=${input.agentId}`
+									'agents/fetch-output',
+									{},
+									qs
 								);
 								return JSON.stringify(response, null, 2);
 							} catch (error) {
