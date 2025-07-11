@@ -18,7 +18,7 @@ export async function phantombusterApiRequest(
 	headers: IDataObject = {},
 	option: IDataObject = {},
 ): Promise<any> {
-	const credentials = await this.getCredentials('phantombusterApi');
+	const credentials = await this.getCredentials('phantombusterCredentialsApi');
 	const apiKey = credentials.apiKey as string;
 
 	const options: IRequestOptions = {
