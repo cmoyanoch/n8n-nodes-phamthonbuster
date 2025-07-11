@@ -60,6 +60,7 @@ export class PhantombusterTool implements INodeType {
 					{ name: '🗑️ Eliminar Lead', value: 'deleteLead' },
 					{ name: '💾 Guardar Muchos Leads', value: 'saveManyLeads' },
 					{ name: '🔍 Buscar Leads Avanzado', value: 'searchLeadsAdvanced' },
+					{ name: '📊 Listar Agentes', value: 'listAgents' },
 				],
 				default: 'runAgent',
 				description: 'Selecciona la operación de Phantombuster',
@@ -181,10 +182,9 @@ export class PhantombusterTool implements INodeType {
 				return {
 					response: new DynamicStructuredTool({
 						name: 'phantombuster_list_executions',
-						description: 'Lista las ejecuciones de un agente',
+						description: 'Lista las ejecuciones de un agente específico',
 						schema: z.object({
-							agentId: z.string().describe('ID del agente'),
-							limit: z.number().optional().describe('Número máximo de ejecuciones'),
+							agentId: z.string().describe('ID del agente de Phantombuster'),
 						}),
 						func: async (input) => {
 							try {
@@ -194,16 +194,10 @@ export class PhantombusterTool implements INodeType {
 									getNode: this.getNode.bind(this),
 								} as IExecuteFunctions;
 
-								const qs: IDataObject = {};
-								if (input.limit) {
-									qs.limit = input.limit;
-								}
 								const response = await phantombusterApiRequest.call(
 									executeContext,
 									'GET',
-									`agents/${input.agentId}/fetch-output`,
-									{},
-									qs
+									`agents/fetch-output?id=${input.agentId}`
 								);
 								return JSON.stringify(response, null, 2);
 							} catch (error) {
@@ -336,7 +330,7 @@ export class PhantombusterTool implements INodeType {
 				return {
 					response: new DynamicStructuredTool({
 						name: 'phantombuster_get_user_info',
-						description: 'Obtiene información del usuario de Phantombuster',
+						description: 'Obtiene información del usuario actual',
 						schema: z.object({}),
 						func: async () => {
 							try {
@@ -349,11 +343,11 @@ export class PhantombusterTool implements INodeType {
 								const response = await phantombusterApiRequest.call(
 									executeContext,
 									'GET',
-									'agents'
+									'user/me'
 								);
 								return JSON.stringify(response, null, 2);
 							} catch (error) {
-								throw new Error(`Error obteniendo información de usuario: ${error}`);
+								throw new Error(`Error obteniendo información del usuario: ${error}`);
 							}
 						},
 					}),
@@ -375,12 +369,13 @@ export class PhantombusterTool implements INodeType {
 									getNode: this.getNode.bind(this),
 								} as IExecuteFunctions;
 
+								const days = input.days || 30;
 								const response = await phantombusterApiRequest.call(
 									executeContext,
 									'GET',
-									'orgs/export-agent-usage',
+									'user/limits',
 									{},
-									{ days: input.days ?? 30 }
+									{ days }
 								);
 								return JSON.stringify(response, null, 2);
 							} catch (error) {
@@ -652,6 +647,33 @@ export class PhantombusterTool implements INodeType {
 								return JSON.stringify(response, null, 2);
 							} catch (error) {
 								throw new Error(`Error en búsqueda avanzada: ${error}`);
+							}
+						},
+					}),
+				};
+
+			case 'listAgents':
+				return {
+					response: new DynamicStructuredTool({
+						name: 'phantombuster_list_agents',
+						description: 'Lista todos los agentes disponibles en la cuenta',
+						schema: z.object({}),
+						func: async () => {
+							try {
+								const executeContext = {
+									getCredentials: this.getCredentials.bind(this),
+									helpers: this.helpers,
+									getNode: this.getNode.bind(this),
+								} as IExecuteFunctions;
+
+								const response = await phantombusterApiRequest.call(
+									executeContext,
+									'GET',
+									'agents/fetch-all'
+								);
+								return JSON.stringify(response, null, 2);
+							} catch (error) {
+								throw new Error(`Error listando agentes: ${error}`);
 							}
 						},
 					}),
