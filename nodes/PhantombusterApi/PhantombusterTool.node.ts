@@ -349,7 +349,7 @@ export class PhantombusterTool implements INodeType {
 								const response = await phantombusterApiRequest.call(
 									executeContext,
 									'GET',
-									'user'
+									'agents'
 								);
 								return JSON.stringify(response, null, 2);
 							} catch (error) {
