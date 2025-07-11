@@ -1,73 +1,43 @@
-import type {
+import {
 	IExecuteFunctions,
+	INodeExecutionData,
+	INodeType,
+	INodeTypeDescription,
 	IDataObject,
-	IHttpRequestMethods,
 	IRequestOptions,
-	JsonObject,
+	IHttpRequestMethods,
 } from 'n8n-workflow';
 import { NodeApiError, NodeOperationError } from 'n8n-workflow';
 
 export async function phantombusterApiRequest(
 	this: IExecuteFunctions,
 	method: IHttpRequestMethods,
-	resource: string,
-	body: any = {},
+	endpoint: string,
+	body: IDataObject = {},
 	qs: IDataObject = {},
-	uri?: string,
 	headers: IDataObject = {},
+	option: IDataObject = {},
 ): Promise<any> {
-	const credentials = await this.getCredentials('phantombusterCredentialsApi');
-
-	if (credentials === undefined) {
-		const node = this.getNode ? this.getNode() : null;
-		throw new NodeApiError(node as any, { message: 'No credentials got returned!' });
-	}
-
-	const { apiKey } = credentials as { apiKey: string };
+	const credentials = await this.getCredentials('phantombusterApi');
+	const apiKey = credentials.apiKey as string;
 
 	const options: IRequestOptions = {
+		method,
 		headers: {
 			'Content-Type': 'application/json',
 			'X-Phantombuster-Key-1': apiKey,
 			...headers,
 		},
-		method,
 		qs,
-		uri: uri || `https://api.phantombuster.com/api/v2/${resource}`,
+		body,
+		uri: `https://api.phantombuster.com/api/v2/${endpoint}`,
 		json: true,
 	};
 
-	if (Object.keys(body).length !== 0) {
-		options.body = body;
-	}
-
 	try {
-		const response = await this.helpers.request(options);
-		return response;
-	} catch (err: unknown) {
-		const error = err as any;
-		let errorMessage = error.message || 'Unknown error occurred';
-
-		// Handle common Phantombuster API errors
-		if (error.response?.body) {
-			try {
-				const errorBody = typeof error.response.body === 'string'
-					? JSON.parse(error.response.body)
-					: error.response.body;
-
-				if (errorBody.error) {
-					errorMessage = errorBody.error;
-				} else if (errorBody.message) {
-					errorMessage = errorBody.message;
-				}
-			} catch (parseError: any) {
-				// If we can't parse the error body, use the original message
-				errorMessage = error.response.body || error.message;
-			}
-		}
-
-		const node = this.getNode ? this.getNode() : null;
-		throw new NodeApiError(node as any, error as JsonObject, { message: errorMessage });
+		return await this.helpers.request(options);
+	} catch (error) {
+		throw new NodeApiError(this.getNode(), error as any);
 	}
 }
 
