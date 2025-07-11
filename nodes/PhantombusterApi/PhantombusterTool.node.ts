@@ -381,14 +381,27 @@ export class PhantombusterTool implements INodeType {
 								} as IExecuteFunctions;
 
 								const days = input.days || 30;
-								const response = await phantombusterApiRequest.call(
-									executeContext,
-									'GET',
-									'user/limits',
-									{},
-									{ days }
-								);
-								return JSON.stringify(response, null, 2);
+								// Intentar primero el endpoint de uso de agentes
+								try {
+									const response = await phantombusterApiRequest.call(
+										executeContext,
+										'GET',
+										'orgs/export-agent-usage',
+										{},
+										{ days }
+									);
+									return JSON.stringify(response, null, 2);
+								} catch (error) {
+									// Si falla, intentar con el endpoint de información del usuario
+									const response = await phantombusterApiRequest.call(
+										executeContext,
+										'GET',
+										'user/me',
+										{},
+										{}
+									);
+									return JSON.stringify(response, null, 2);
+								}
 							} catch (error) {
 								throw new Error(`Error obteniendo límites: ${error}`);
 							}

@@ -346,7 +346,7 @@ n8n-nodes-custome/
 | `searchLeads`       | `GET /lead-lists/search-leads`  | Busca leads           |
 | `listLeadLists`     | `GET /lead-lists`               | Lista listas de leads |
 | `getUserInfo`       | `GET /user`                     | Info del usuario      |
-| `getLimits`         | `GET /user/limits`              | Límites de la cuenta  |
+| `getLimits`         | `GET /orgs/export-agent-usage`  | Límites de la cuenta  |
 | `renewCookies`      | `POST /agents/renew-cookies`    | Renueva cookies       |
 | `verifyCookies`     | `GET /agents/verify-cookies`    | Verifica cookies      |
 
